@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Johan Avendaño | Python Automation</title>
-  <meta name="description" content="Portfolio de automatización con Python: Selenium, APIs, MongoDB y e-commerce (WooCommerce)."/>
+  <meta name="description" content="Portfolio de automatización con Python: Selenium, APIs, MongoDB, scraping y automatización de procesos para e-commerce y operaciones." />
 
   <style>
     :root{
@@ -17,7 +17,7 @@
       --accent2:#34d399;
       --shadow: 0 18px 60px rgba(0,0,0,.35);
       --radius: 18px;
-      --max: 980px;
+      --max: 1040px;
     }
     *{box-sizing:border-box}
     body{
@@ -56,6 +56,7 @@
       color: var(--text);
       font-weight:600;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      white-space:nowrap;
     }
     .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18)}
     .btn.primary{
@@ -63,10 +64,10 @@
       border-color: rgba(96,165,250,.35);
     }
 
-    header{padding:34px 0 18px}
+    header{padding:34px 0 10px}
     .hero{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1.25fr .75fr;
       gap:18px;
       align-items:stretch;
     }
@@ -81,16 +82,14 @@
     .role{color:var(--muted); font-size: 16px; margin:0 0 14px}
     .pitch{color:var(--text); opacity:.92; line-height:1.55; margin:0}
     .bullets{margin:14px 0 0; padding:0; list-style:none; display:grid; gap:10px}
-    .bullets li{
-      display:flex; gap:10px; align-items:flex-start;
-      color: var(--muted);
-    }
+    .bullets li{display:flex; gap:10px; align-items:flex-start; color: var(--muted)}
     .tick{
       margin-top:4px;
       width:18px;height:18px;border-radius:6px;
       background: rgba(52,211,153,.15);
       border:1px solid rgba(52,211,153,.35);
       position:relative;
+      flex: 0 0 auto;
     }
     .tick:after{
       content:"";
@@ -118,6 +117,16 @@
     }
     .section-title h2{margin:0; font-size: 18px; letter-spacing:.2px}
     .muted{color:var(--muted)}
+    .topbar{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top:14px;
+    }
+    .note{
+      margin:0;
+      color: var(--muted);
+      line-height:1.55;
+    }
+
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -130,7 +139,7 @@
       padding: 18px;
       box-shadow: 0 12px 40px rgba(0,0,0,.25);
       transition: transform .12s ease, border-color .12s ease, background .12s ease;
-      min-height: 170px;
+      min-height: 185px;
       display:flex; flex-direction:column; justify-content:space-between;
     }
     .card:hover{
@@ -143,12 +152,16 @@
     .meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
     .link{
       display:inline-flex; align-items:center; gap:8px;
-      font-weight:700;
+      font-weight:800;
       color: var(--accent);
       margin-top: 10px;
     }
-    .link span{opacity:.9}
     .arrow{opacity:.9}
+
+    .filters{
+      display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+      margin: 8px 0 6px;
+    }
 
     footer{
       padding:28px 0 40px;
@@ -158,7 +171,7 @@
       margin-top: 18px;
     }
 
-    @media (max-width: 900px){
+    @media (max-width: 980px){
       .hero{grid-template-columns: 1fr}
       .grid{grid-template-columns: 1fr}
       h1{font-size: 34px}
@@ -175,9 +188,9 @@
         <strong>Johan Avendaño</strong>
       </div>
       <div class="links">
-        <!-- Cambia estos links cuando quieras -->
-        <a class="btn primary" href="#" title="Descargar CV (PDF)">CV (PDF)</a>
-        <a class="btn" href="#" title="LinkedIn">LinkedIn</a>
+        <!-- Actualiza estos enlaces -->
+        <a class="btn primary" href="assets/cv/Johan_Avendano_CV.pdf" title="Descargar CV (PDF)">CV (PDF)</a>
+        <a class="btn" href="https://www.linkedin.com/" title="LinkedIn" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="mailto:TU_CORREO@EMAIL.COM" title="Email">Email</a>
       </div>
     </div>
@@ -186,11 +199,11 @@
       <div class="hero">
         <div class="panel">
           <h1>Python Automation</h1>
-          <p class="role">Automatización web · APIs · MongoDB · E-commerce (WooCommerce)</p>
+          <p class="role">Automatización web · APIs · MongoDB · Scraping · E-commerce (WooCommerce)</p>
           <p class="pitch">
-            Profesional en tecnología con amplia trayectoria en el sector TI. En los últimos años he desarrollado
-            experiencia en automatización de procesos con Python, enfocándome en optimizar tareas repetitivas,
-            automatización web e integración de sistemas.
+            Tecnólogo en Sistemas de Información con especialización en Gerencia de Proyectos Informáticos y experiencia
+            amplia en el sector TI. En los últimos años he desarrollado experiencia en automatización de procesos con Python,
+            enfocándome en optimizar tareas repetitivas, automatización web e integración de sistemas.
           </p>
 
           <ul class="bullets">
@@ -207,27 +220,51 @@
             <span class="chip">MongoDB</span>
             <span class="chip">Scrapy</span>
             <span class="chip">BeautifulSoup</span>
+            <span class="chip">Excel</span>
             <span class="chip">Asyncio (básico)</span>
+          </div>
+
+          <div class="topbar">
+            <span class="chip">Disponible: Remoto / Presencial</span>
+            <span class="chip">Ubicación: Colombia</span>
           </div>
         </div>
 
         <div class="panel">
           <div class="section-title">
-            <h2>En qué trabajo</h2>
-            <span class="muted">Resumen</span>
+            <h2>Qué encontrarás aquí</h2>
+            <span class="muted">Portfolio</span>
           </div>
-          <p class="muted" style="margin:0; line-height:1.6">
-            Me enfoco en construir automatizaciones que reduzcan trabajo manual y mejoren operaciones:
-            scraping controlado, bots de procesos web, integraciones por API y automatizaciones en e-commerce.
+          <p class="note">
+            Proyectos reales de automatización con Python: scraping controlado, bots de procesos web,
+            integraciones por API, automatizaciones de pricing/inventario y flujos para e-commerce.
+            Cada proyecto tendrá su página con explicación y demo (sin publicar código sensible).
           </p>
 
-          <div style="height:12px"></div>
+          <div style="height:14px"></div>
 
           <div class="section-title">
-            <h2>Ubicación</h2>
-            <span class="muted">Colombia</span>
+            <h2>Enfoque</h2>
+            <span class="muted">Práctico</span>
           </div>
-          <p class="muted" style="margin:0">Remoto / Presencial</p>
+          <div class="filters">
+            <span class="chip">Automatización</span>
+            <span class="chip">Scraping & Data</span>
+            <span class="chip">APIs</span>
+            <span class="chip">E-commerce</span>
+            <span class="chip">Excel Automations</span>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="section-title">
+            <h2>Contacto</h2>
+            <span class="muted">Rápido</span>
+          </div>
+          <p class="note" style="margin-top:0">
+            Email: <b>TU_CORREO@EMAIL.COM</b><br/>
+            LinkedIn: <b>tu-perfil</b>
+          </p>
         </div>
       </div>
     </header>
@@ -235,14 +272,15 @@
     <section>
       <div class="section-title">
         <h2>Proyectos</h2>
-        <span class="muted">3 destacados</span>
+        <span class="muted">Detalles y demos</span>
       </div>
 
       <div class="grid">
-        <a class="card" href="projects/selenium-automation.html">
+        <!-- 1 -->
+        <a class="card" href="projects/selenium-web-automation.html">
           <div>
             <h3>Automatización web con Selenium</h3>
-            <p>Automatización end-to-end de tareas repetitivas en plataformas web (login, formularios, validaciones, descargas).</p>
+            <p>Automatización end-to-end de tareas repetitivas: login, formularios, validaciones y descargas.</p>
             <div class="meta">
               <span class="chip">Python</span><span class="chip">Selenium</span>
             </div>
@@ -250,23 +288,121 @@
           <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
         </a>
 
-        <a class="card" href="projects/pricing-bot-mongodb.html">
+        <!-- 2 -->
+        <a class="card" href="projects/amazon-scraper-mongodb.html">
           <div>
-            <h3>Bot de precios con Python + MongoDB</h3>
-            <p>Scripts para calcular/actualizar precios y mantener datos de productos, apoyando flujos operativos.</p>
+            <h3>Scraper Amazon → MongoDB</h3>
+            <p>Extracción paginada de catálogos (ASIN, título, precio, stock, marca, imágenes) y guardado estructurado.</p>
             <div class="meta">
-              <span class="chip">Python</span><span class="chip">MongoDB</span>
+              <span class="chip">Python</span><span class="chip">Selenium</span><span class="chip">MongoDB</span>
             </div>
           </div>
           <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
         </a>
 
-        <a class="card" href="projects/woocommerce-automation.html">
+        <!-- 3 -->
+        <a class="card" href="projects/mercadolibre-publicador-api.html">
           <div>
-            <h3>Automatización en WooCommerce</h3>
-            <p>Automatización de procesos e integración con APIs para gestionar productos, precios y datos en e-commerce.</p>
+            <h3>Publicación masiva en Mercado Libre (API)</h3>
+            <p>Publicación de productos desde BD a Mercado Libre por API, incluyendo imágenes, precio, stock y persistencia del ID.</p>
             <div class="meta">
-              <span class="chip">WooCommerce</span><span class="chip">REST API</span>
+              <span class="chip">Python</span><span class="chip">Requests</span><span class="chip">MongoDB</span><span class="chip">Meli API</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 4 -->
+        <a class="card" href="projects/sync-precio-stock-amazon-ml.html">
+          <div>
+            <h3>Sincronización de precio y stock (Amazon → Mercado Libre)</h3>
+            <p>Monitoreo de cambios y actualización/pausa automática de publicaciones para mantener consistencia.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Selenium</span><span class="chip">Requests</span><span class="chip">MongoDB</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 5 -->
+        <a class="card" href="projects/trm-pricing-cop.html">
+          <div>
+            <h3>TRM del día + cálculo de precios COP</h3>
+            <p>Consulta TRM vía Requests y aplica reglas de pricing para convertir USD → COP de forma automatizada.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Requests</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 6 -->
+        <a class="card" href="projects/imagenes-1200px-normalizacion.html">
+          <div>
+            <h3>Normalización masiva de imágenes (1200px)</h3>
+            <p>Revisión y redimensionado automático de imágenes por producto para estandarizar calidad y formato.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">PIL</span><span class="chip">MongoDB</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 7 -->
+        <a class="card" href="projects/imagenes-imagekit-upload.html">
+          <div>
+            <h3>Redimensionado + subida a nube (ImageKit)</h3>
+            <p>Pipeline de procesamiento de imágenes y publicación en CDN con actualización automática de URLs en BD.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">PIL</span><span class="chip">MongoDB</span><span class="chip">ImageKit</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 8 -->
+        <a class="card" href="projects/removebg-workflow.html">
+          <div>
+            <h3>Remoción de fondo + actualización en BD</h3>
+            <p>Flujo asistido para remover fondo y estandarizar imágenes, dejando la información lista para marketplaces.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">PIL</span><span class="chip">MongoDB</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 9 -->
+        <a class="card" href="projects/meta-posting-automation.html">
+          <div>
+            <h3>Publicación en Facebook/Instagram (Graph API)</h3>
+            <p>Automatización de copies y publicación programada usando APIs, integrando contenido desde procesos internos.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Requests</span><span class="chip">Meta Graph API</span><span class="chip">MongoDB</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 10 -->
+        <a class="card" href="projects/dian-rut-verificador-excel.html">
+          <div>
+            <h3>Verificador RUT DIAN desde Excel</h3>
+            <p>Automatización de consulta/validación de estado RUT (NIT/Cédula) leyendo y marcando resultados en Excel.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Selenium</span><span class="chip">Excel</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 11 -->
+        <a class="card" href="projects/siigo-radian-automation-excel.html">
+          <div>
+            <h3>SIIGO: aceptación de facturas (RADIAN) desde Excel</h3>
+            <p>Automatización de consultas y aceptación/registro de eventos, procesando lotes desde un archivo Excel.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Selenium</span><span class="chip">Excel</span>
             </div>
           </div>
           <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
