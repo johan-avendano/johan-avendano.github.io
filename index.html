@@ -1,123 +1,282 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Johan Avendaño | Python Automation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio de automatización con Python: Selenium, APIs, MongoDB y e-commerce (WooCommerce)."/>
+
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f5f7fa;
-      color: #1f2937;
-      margin: 0;
-      padding: 0;
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2f;
+      --text:#e5e7eb;
+      --muted:#a7b0c0;
+      --line:rgba(255,255,255,.10);
+      --accent:#60a5fa;
+      --accent2:#34d399;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 980px;
     }
-    header {
-      background: #0f172a;
-      color: #ffffff;
-      padding: 40px 20px;
-      text-align: center;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.25), transparent 55%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(52,211,153,.18), transparent 45%),
+                  var(--bg);
+      color:var(--text);
     }
-    header h1 {
-      margin: 0;
-      font-size: 32px;
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:14px 18px;
+      border:1px solid var(--line);
+      background: rgba(15,26,47,.65);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      position: sticky; top:14px; z-index:10;
     }
-    header p {
+    .brand{display:flex; gap:10px; align-items:center}
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(96,165,250,.10);
+    }
+    .brand strong{letter-spacing:.3px}
+    .links{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-weight:600;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(96,165,250,.22), rgba(52,211,153,.18));
+      border-color: rgba(96,165,250,.35);
+    }
+
+    header{padding:34px 0 18px}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .panel{
+      border:1px solid var(--line);
+      background: rgba(15,26,47,.55);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    h1{margin:0 0 8px; font-size: 40px; line-height:1.05; letter-spacing:-.6px}
+    .role{color:var(--muted); font-size: 16px; margin:0 0 14px}
+    .pitch{color:var(--text); opacity:.92; line-height:1.55; margin:0}
+    .bullets{margin:14px 0 0; padding:0; list-style:none; display:grid; gap:10px}
+    .bullets li{
+      display:flex; gap:10px; align-items:flex-start;
+      color: var(--muted);
+    }
+    .tick{
+      margin-top:4px;
+      width:18px;height:18px;border-radius:6px;
+      background: rgba(52,211,153,.15);
+      border:1px solid rgba(52,211,153,.35);
+      position:relative;
+    }
+    .tick:after{
+      content:"";
+      position:absolute; left:5px; top:4px;
+      width:6px; height:9px;
+      border-right:2px solid rgba(52,211,153,.9);
+      border-bottom:2px solid rgba(52,211,153,.9);
+      transform: rotate(45deg);
+    }
+
+    .stack{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .chip{
+      font-size: 12px;
+      color: rgba(229,231,235,.9);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      padding:6px 10px;
+      border-radius: 999px;
+    }
+
+    section{padding:16px 0}
+    .section-title{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin: 8px 0 12px;
+    }
+    .section-title h2{margin:0; font-size: 18px; letter-spacing:.2px}
+    .muted{color:var(--muted)}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--line);
+      background: rgba(15,26,47,.50);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.25);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      min-height: 170px;
+      display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(96,165,250,.35);
+      background: rgba(15,26,47,.62);
+    }
+    .card h3{margin:0 0 8px; font-size:16px}
+    .card p{margin:0 0 10px; color:var(--muted); line-height:1.45}
+    .meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .link{
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:700;
+      color: var(--accent);
       margin-top: 10px;
-      font-size: 18px;
-      color: #cbd5f5;
     }
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 40px 20px;
+    .link span{opacity:.9}
+    .arrow{opacity:.9}
+
+    footer{
+      padding:28px 0 40px;
+      color: var(--muted);
+      text-align:center;
+      border-top:1px solid var(--line);
+      margin-top: 18px;
     }
-    section {
-      margin-bottom: 40px;
-    }
-    h2 {
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 8px;
-    }
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: #ffffff;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-    .card h3 {
-      margin-top: 0;
-    }
-    .card a {
-      display: inline-block;
-      margin-top: 10px;
-      color: #2563eb;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #e5e7eb;
-      color: #374151;
-      font-size: 14px;
+
+    @media (max-width: 900px){
+      .hero{grid-template-columns: 1fr}
+      .grid{grid-template-columns: 1fr}
+      h1{font-size: 34px}
+      .nav{border-radius: 18px}
     }
   </style>
 </head>
+
 <body>
-
-<header>
-  <h1>Johan Avendaño</h1>
-  <p>Python Automation | Selenium | APIs | MongoDB</p>
-</header>
-
-<main>
-
-  <section>
-    <h2>Sobre mí</h2>
-    <p>
-      Profesional en tecnología con más de 15 años de experiencia en el sector TI.
-      En los últimos años he desarrollado experiencia en automatización de procesos
-      con Python, enfocándome en la optimización de tareas repetitivas, automatización
-      web e integración de sistemas.
-    </p>
-  </section>
-
-  <section>
-    <h2>Proyectos</h2>
-    <div class="projects">
-
-      <div class="card">
-        <h3>Automatización Web con Selenium</h3>
-        <p>Automatización de procesos web repetitivos mediante Python y Selenium.</p>
-        <a href="#">Ver proyecto</a>
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <div class="dot"></div>
+        <strong>Johan Avendaño</strong>
       </div>
-
-      <div class="card">
-        <h3>Automatización de precios con Python</h3>
-        <p>Scripts para actualización y gestión de precios usando Python y MongoDB.</p>
-        <a href="#">Ver proyecto</a>
+      <div class="links">
+        <!-- Cambia estos links cuando quieras -->
+        <a class="btn primary" href="#" title="Descargar CV (PDF)">CV (PDF)</a>
+        <a class="btn" href="#" title="LinkedIn">LinkedIn</a>
+        <a class="btn" href="mailto:TU_CORREO@EMAIL.COM" title="Email">Email</a>
       </div>
-
-      <div class="card">
-        <h3>Integración y automatización WooCommerce</h3>
-        <p>Automatización de flujos de productos y datos en e-commerce.</p>
-        <a href="#">Ver proyecto</a>
-      </div>
-
     </div>
-  </section>
 
-</main>
+    <header>
+      <div class="hero">
+        <div class="panel">
+          <h1>Python Automation</h1>
+          <p class="role">Automatización web · APIs · MongoDB · E-commerce (WooCommerce)</p>
+          <p class="pitch">
+            Profesional en tecnología con amplia trayectoria en el sector TI. En los últimos años he desarrollado
+            experiencia en automatización de procesos con Python, enfocándome en optimizar tareas repetitivas,
+            automatización web e integración de sistemas.
+          </p>
 
-<footer>
-  © 2025 Johan Avendaño
-</footer>
+          <ul class="bullets">
+            <li><span class="tick"></span><span>Automatización web con <b>Selenium</b> para flujos sin API (formularios, validaciones, descargas).</span></li>
+            <li><span class="tick"></span><span>Integración de servicios mediante <b>APIs REST</b> (Requests / httpx).</span></li>
+            <li><span class="tick"></span><span>Manejo básico de datos en <b>MongoDB</b> para scripts y procesos.</span></li>
+          </ul>
 
+          <div class="stack">
+            <span class="chip">Python</span>
+            <span class="chip">Selenium</span>
+            <span class="chip">Requests</span>
+            <span class="chip">httpx</span>
+            <span class="chip">MongoDB</span>
+            <span class="chip">Scrapy</span>
+            <span class="chip">BeautifulSoup</span>
+            <span class="chip">Asyncio (básico)</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="section-title">
+            <h2>En qué trabajo</h2>
+            <span class="muted">Resumen</span>
+          </div>
+          <p class="muted" style="margin:0; line-height:1.6">
+            Me enfoco en construir automatizaciones que reduzcan trabajo manual y mejoren operaciones:
+            scraping controlado, bots de procesos web, integraciones por API y automatizaciones en e-commerce.
+          </p>
+
+          <div style="height:12px"></div>
+
+          <div class="section-title">
+            <h2>Ubicación</h2>
+            <span class="muted">Colombia</span>
+          </div>
+          <p class="muted" style="margin:0">Remoto / Presencial</p>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="section-title">
+        <h2>Proyectos</h2>
+        <span class="muted">3 destacados</span>
+      </div>
+
+      <div class="grid">
+        <a class="card" href="projects/selenium-automation.html">
+          <div>
+            <h3>Automatización web con Selenium</h3>
+            <p>Automatización end-to-end de tareas repetitivas en plataformas web (login, formularios, validaciones, descargas).</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Selenium</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <a class="card" href="projects/pricing-bot-mongodb.html">
+          <div>
+            <h3>Bot de precios con Python + MongoDB</h3>
+            <p>Scripts para calcular/actualizar precios y mantener datos de productos, apoyando flujos operativos.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">MongoDB</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <a class="card" href="projects/woocommerce-automation.html">
+          <div>
+            <h3>Automatización en WooCommerce</h3>
+            <p>Automatización de procesos e integración con APIs para gestionar productos, precios y datos en e-commerce.</p>
+            <div class="meta">
+              <span class="chip">WooCommerce</span><span class="chip">REST API</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      © 2025 Johan Avendaño · <span class="muted">GitHub Pages</span>
+    </footer>
+  </div>
 </body>
 </html>
