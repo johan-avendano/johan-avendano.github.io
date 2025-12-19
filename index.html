@@ -20,15 +20,15 @@
       --max: 1040px;
     }
 
-    /* 🌗 LIGHT THEME (soft, no blanco puro) */
+    /* 🌗 Tema claro suave (no blanco puro) */
     html[data-theme="light"]{
-      --bg:#f1f5f9;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#475569;
+      --bg:#f1f5f9;             /* slate-100 */
+      --card:rgba(255,255,255,.92);
+      --text:#0f172a;           /* slate-900 */
+      --muted:#475569;          /* slate-600 */
       --line:rgba(15,23,42,.12);
-      --accent:#2563eb;
-      --accent2:#059669;
+      --accent:#2563eb;         /* blue-600 */
+      --accent2:#059669;        /* emerald-600 */
       --shadow: 0 18px 50px rgba(15,23,42,.12);
     }
 
@@ -36,12 +36,23 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-      background: var(--bg);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.25), transparent 55%),
+        radial-gradient(900px 500px at 90% 0%, rgba(52,211,153,.18), transparent 45%),
+        var(--bg);
       color:var(--text);
     }
+
+    /* Ajuste del fondo cuando es tema claro (más suave) */
+    html[data-theme="light"] body{
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(37,99,235,.14), transparent 58%),
+        radial-gradient(900px 500px at 90% 0%, rgba(5,150,105,.10), transparent 52%),
+        var(--bg);
+    }
+
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:24px}
-
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       gap:14px; padding:14px 18px;
@@ -51,8 +62,10 @@
       border-radius: 999px;
       position: sticky; top:14px; z-index:10;
     }
+
+    /* nav más claro en tema light */
     html[data-theme="light"] .nav{
-      background: rgba(255,255,255,.75);
+      background: rgba(255,255,255,.72);
     }
 
     .brand{display:flex; gap:10px; align-items:center}
@@ -60,6 +73,9 @@
       width:10px;height:10px;border-radius:50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       box-shadow: 0 0 0 6px rgba(96,165,250,.10);
+    }
+    html[data-theme="light"] .dot{
+      box-shadow: 0 0 0 6px rgba(37,99,235,.10);
     }
     .brand strong{letter-spacing:.3px}
 
@@ -72,7 +88,23 @@
       background: rgba(255,255,255,.04);
       color: var(--text);
       font-weight:600;
-      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      white-space:nowrap;
+      cursor:pointer; /* para el botón */
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18)}
+    html[data-theme="light"] .btn:hover{
+      background: rgba(15,23,42,.04);
+      border-color: rgba(15,23,42,.16);
+    }
+
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(96,165,250,.22), rgba(52,211,153,.18));
+      border-color: rgba(96,165,250,.35);
+    }
+    html[data-theme="light"] .btn.primary{
+      background: linear-gradient(135deg, rgba(37,99,235,.14), rgba(5,150,105,.10));
+      border-color: rgba(37,99,235,.25);
     }
 
     header{padding:34px 0 10px}
@@ -80,8 +112,8 @@
       display:grid;
       grid-template-columns: 1.25fr .75fr;
       gap:18px;
+      align-items:stretch;
     }
-
     .panel{
       border:1px solid var(--line);
       background: rgba(15,26,47,.55);
@@ -93,38 +125,168 @@
       background: var(--card);
     }
 
-    h1{margin:0 0 8px; font-size: 40px}
-    .role{color:var(--muted); margin-bottom:14px}
-    .chip{
-      font-size:12px;
-      border:1px solid var(--line);
-      padding:6px 10px;
-      border-radius:999px;
+    h1{margin:0 0 8px; font-size: 40px; line-height:1.05; letter-spacing:-.6px}
+    .role{color:var(--muted); font-size: 16px; margin:0 0 14px}
+    .pitch{color:var(--text); opacity:.92; line-height:1.55; margin:0}
+    html[data-theme="light"] .pitch{opacity:.98}
+
+    .bullets{margin:14px 0 0; padding:0; list-style:none; display:grid; gap:10px}
+    .bullets li{display:flex; gap:10px; align-items:flex-start; color: var(--muted)}
+    .tick{
+      margin-top:4px;
+      width:18px;height:18px;border-radius:6px;
+      background: rgba(52,211,153,.15);
+      border:1px solid rgba(52,211,153,.35);
+      position:relative;
+      flex: 0 0 auto;
+    }
+    html[data-theme="light"] .tick{
+      background: rgba(5,150,105,.10);
+      border-color: rgba(5,150,105,.28);
+    }
+    .tick:after{
+      content:"";
+      position:absolute; left:5px; top:4px;
+      width:6px; height:9px;
+      border-right:2px solid rgba(52,211,153,.9);
+      border-bottom:2px solid rgba(52,211,153,.9);
+      transform: rotate(45deg);
+    }
+    html[data-theme="light"] .tick:after{
+      border-right-color: rgba(5,150,105,.9);
+      border-bottom-color: rgba(5,150,105,.9);
     }
 
-    /* PERFIL */
+    .stack{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .chip{
+      font-size: 12px;
+      color: rgba(229,231,235,.9);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      padding:6px 10px;
+      border-radius: 999px;
+    }
+    html[data-theme="light"] .chip{
+      color: rgba(15,23,42,.86);
+      background: rgba(15,23,42,.03);
+    }
+
+    /* ✅ PERFIL */
     .profile{
-      display:flex; gap:12px; align-items:center;
+      display:flex;
+      gap:12px;
+      align-items:center;
       padding:12px;
       border:1px solid var(--line);
-      border-radius:14px;
+      background: rgba(255,255,255,.03);
+      border-radius: 14px;
       margin-bottom:14px;
     }
+    html[data-theme="light"] .profile{
+      background: rgba(15,23,42,.02);
+    }
     .avatar{
-      width:72px;height:72px;border-radius:999px;
-      object-fit:cover;border:1px solid var(--line);
+      width:72px;
+      height:72px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      object-fit:cover;
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 14px 40px rgba(0,0,0,.28);
+      flex: 0 0 auto;
+    }
+    html[data-theme="light"] .avatar{
+      border-color: rgba(15,23,42,.12);
+      box-shadow: 0 14px 40px rgba(15,23,42,.10);
+      background: rgba(15,23,42,.03);
+    }
+    .profile .name{
+      margin:0;
+      font-weight:800;
+      letter-spacing:.2px;
+      line-height:1.2;
+    }
+    .profile .mini{
+      margin:4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.35;
+    }
+
+    section{padding:16px 0}
+    .section-title{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin: 8px 0 12px;
+    }
+    .section-title h2{margin:0; font-size: 18px; letter-spacing:.2px}
+    .muted{color:var(--muted)}
+    .topbar{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top:14px;
+    }
+    .note{
+      margin:0;
+      color: var(--muted);
+      line-height:1.55;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--line);
+      background: rgba(15,26,47,.50);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.25);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      min-height: 185px;
+      display:flex; flex-direction:column; justify-content:space-between;
+    }
+    html[data-theme="light"] .card{
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 12px 40px rgba(15,23,42,.08);
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(96,165,250,.35);
+      background: rgba(15,26,47,.62);
+    }
+    html[data-theme="light"] .card:hover{
+      border-color: rgba(37,99,235,.28);
+      background: rgba(255,255,255,.92);
+    }
+    .card h3{margin:0 0 8px; font-size:16px}
+    .card p{margin:0 0 10px; color:var(--muted); line-height:1.45}
+    .meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .link{
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:800;
+      color: var(--accent);
+      margin-top: 10px;
+    }
+    .arrow{opacity:.9}
+
+    .filters{
+      display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+      margin: 8px 0 6px;
     }
 
     footer{
       padding:28px 0 40px;
+      color: var(--muted);
       text-align:center;
       border-top:1px solid var(--line);
-      margin-top:18px;
-      color:var(--muted);
+      margin-top: 18px;
     }
 
     @media (max-width: 980px){
-      .hero{grid-template-columns:1fr}
+      .hero{grid-template-columns: 1fr}
+      .grid{grid-template-columns: 1fr}
+      h1{font-size: 34px}
+      .nav{border-radius: 18px}
     }
   </style>
 </head>
@@ -137,9 +299,13 @@
         <strong>Johan Avendaño</strong>
       </div>
       <div class="links">
-        <a class="btn" href="assets/cv/Johan_Avendano_CV.pdf">CV</a>
-        <a class="btn" href="https://www.linkedin.com/">LinkedIn</a>
-        <button class="btn" id="themeToggle">🌗 Tema</button>
+        <!-- Actualiza estos enlaces -->
+        <a class="btn primary" href="assets/cv/Johan_Avendano_CV.pdf" title="Descargar CV (PDF)">CV (PDF)</a>
+        <a class="btn" href="https://www.linkedin.com/" title="LinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:TU_CORREO@EMAIL.COM" title="Email">Email</a>
+
+        <!-- 🌗 Botón de tema -->
+        <button class="btn" id="themeToggle" type="button" title="Cambiar tema">🌗 Tema</button>
       </div>
     </div>
 
@@ -147,43 +313,276 @@
       <div class="hero">
         <div class="panel">
           <h1>Python Automation</h1>
-          <p class="role">Automatización · APIs · Scraping · E-commerce</p>
+          <p class="role">Automatización web · APIs · MongoDB · Scraping · E-commerce (WooCommerce)</p>
+          <p class="pitch">
+            Tecnólogo en Sistemas de Información con especialización en Gerencia de Proyectos Informáticos y experiencia
+            amplia en el sector TI. En los últimos años he desarrollado experiencia en automatización de procesos con Python,
+            enfocándome en optimizar tareas repetitivas, automatización web e integración de sistemas.
+          </p>
+
+          <ul class="bullets">
+            <li><span class="tick"></span><span>Automatización web con <b>Selenium</b> para flujos sin API (formularios, validaciones, descargas).</span></li>
+            <li><span class="tick"></span><span>Integración de servicios mediante <b>APIs REST</b> (Requests / httpx).</span></li>
+            <li><span class="tick"></span><span>Manejo de datos en <b>MongoDB</b> para scripts y procesos.</span></li>
+          </ul>
+
+          <div class="stack">
+            <span class="chip">Python</span>
+            <span class="chip">Selenium</span>
+            <span class="chip">Requests</span>
+            <span class="chip">httpx</span>
+            <span class="chip">MongoDB</span>
+            <span class="chip">Scrapy</span>
+            <span class="chip">BeautifulSoup</span>
+            <span class="chip">Excel</span>
+            <span class="chip">Asyncio</span>
+          </div>
+
+          <div class="topbar">
+            <span class="chip">Disponible: Remoto / Presencial</span>
+            <span class="chip">Ubicación: Colombia</span>
+          </div>
         </div>
 
         <div class="panel">
+
+          <!-- ✅ BLOQUE PERFIL -->
           <div class="profile">
-            <img class="avatar" src="assets/img/perfil.png" alt="Johan Avendaño">
+            <img class="avatar" src="assets/img/perfil.png" alt="Foto de Johan Avendaño" loading="lazy">
             <div>
-              <strong>Johan Avendaño</strong><br/>
-              <span style="color:var(--muted)">Python Automation & Backend</span>
+              <p class="name">Johan Avendaño</p>
+              <p class="mini">Python Automation & Backend · Selenium · APIs · MongoDB</p>
             </div>
           </div>
-          <p>Proyectos reales de automatización con Python, APIs y flujos empresariales.</p>
+
+          <div class="section-title">
+            <h2>Qué encontrarás aquí</h2>
+            <span class="muted">Portfolio</span>
+          </div>
+          <p class="note">
+            Proyectos reales de automatización con Python: scraping controlado, bots de procesos web,
+            integraciones por API, automatizaciones de pricing/inventario y flujos para e-commerce.
+            Cada proyecto tendrá su página con explicación y demo (sin publicar código sensible).
+          </p>
+
+          <div style="height:14px"></div>
+
+          <div class="section-title">
+            <h2>Enfoque</h2>
+            <span class="muted">Práctico</span>
+          </div>
+          <div class="filters">
+            <span class="chip">Automatización</span>
+            <span class="chip">Scraping & Data</span>
+            <span class="chip">APIs</span>
+            <span class="chip">E-commerce</span>
+            <span class="chip">Excel Automations</span>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="section-title">
+            <h2>Contacto</h2>
+            <span class="muted">Rápido</span>
+          </div>
+          <p class="note" style="margin-top:0">
+            Email: <b>johanavendano1@gmail.com</b><br/>
+            LinkedIn: <b>www.linkedin.com/in/johan-avendaño</b>
+          </p>
         </div>
       </div>
     </header>
 
+    <section>
+      <div class="section-title" id="proyectos">
+        <h2>Proyectos</h2>
+        <span class="muted">Detalles y demos</span>
+      </div>
+
+      <div class="grid">
+        <!-- 0 -->
+        <a class="card" href="projects/sitrac/">
+          <div>
+            <h3>SITRAC → SIIGO + DIAN</h3>
+            <p>Automatización end-to-end para egresos, documento soporte y gestión DIAN, sin publicar código sensible.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Selenium</span><span class="chip">Excel</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 1 -->
+        <a class="card" href="projects/selenium-web-automation/">
+          <div>
+            <h3>Automatización web con Selenium</h3>
+            <p>Automatización end-to-end de tareas repetitivas: login, formularios, validaciones y descargas.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Selenium</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 2 -->
+        <a class="card" href="projects/amazon-scraper-mongodb/">
+          <div>
+            <h3>Scraper Amazon → MongoDB</h3>
+            <p>Extracción paginada de catálogos (ASIN, título, precio, stock, marca, imágenes) y guardado estructurado.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Selenium</span><span class="chip">MongoDB</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 3 -->
+        <a class="card" href="projects/mercadolibre-publicador-api/">
+          <div>
+            <h3>Publicación masiva en Mercado Libre (API)</h3>
+            <p>Publicación de productos desde BD a Mercado Libre por API, incluyendo imágenes, precio, stock y persistencia del ID.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Requests</span><span class="chip">MongoDB</span><span class="chip">Meli API</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 4 -->
+        <a class="card" href="projects/sync-precio-stock-amazon-ml/">
+          <div>
+            <h3>Sincronización de precio y stock (Amazon → Mercado Libre)</h3>
+            <p>Monitoreo de cambios y actualización/pausa automática de publicaciones para mantener consistencia.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Selenium</span><span class="chip">Requests</span><span class="chip">MongoDB</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 5 -->
+        <a class="card" href="projects/trm-pricing-cop/">
+          <div>
+            <h3>TRM del día + cálculo de precios COP</h3>
+            <p>Consulta TRM vía Requests y aplica reglas de pricing para convertir USD → COP de forma automatizada.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Requests</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 6 -->
+        <a class="card" href="projects/imagenes-1200px-normalizacion/">
+          <div>
+            <h3>Normalización masiva de imágenes (1200px)</h3>
+            <p>Revisión y redimensionado automático de imágenes por producto para estandarizar calidad y formato.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">PIL</span><span class="chip">MongoDB</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 7 -->
+        <a class="card" href="projects/imagenes-imagekit-upload/">
+          <div>
+            <h3>Redimensionado + subida a nube (ImageKit)</h3>
+            <p>Pipeline de procesamiento de imágenes y publicación en CDN con actualización automática de URLs en BD.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">PIL</span><span class="chip">MongoDB</span><span class="chip">ImageKit</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 8 -->
+        <a class="card" href="projects/removebg-workflow/">
+          <div>
+            <h3>Remoción de fondo + actualización en BD</h3>
+            <p>Flujo asistido para remover fondo y estandarizar imágenes, dejando la información lista para marketplaces.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">PIL</span><span class="chip">MongoDB</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 9 -->
+        <a class="card" href="projects/meta-posting-automation/">
+          <div>
+            <h3>Publicación en Facebook/Instagram (Graph API)</h3>
+            <p>Automatización de copies y publicación programada usando APIs, integrando contenido desde procesos internos.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Requests</span><span class="chip">Meta Graph API</span><span class="chip">MongoDB</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 10 -->
+        <a class="card" href="projects/dian-rut-verificador-excel/">
+          <div>
+            <h3>Verificador RUT DIAN desde Excel</h3>
+            <p>Automatización de consulta/validación de estado RUT (NIT/Cédula) leyendo y marcando resultados en Excel.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Selenium</span><span class="chip">Excel</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+
+        <!-- 11 -->
+        <a class="card" href="projects/siigo-radian-automation-excel/">
+          <div>
+            <h3>SIIGO: aceptación de facturas (RADIAN) desde Excel</h3>
+            <p>Automatización de consultas y aceptación/registro de eventos, procesando lotes desde un archivo Excel.</p>
+            <div class="meta">
+              <span class="chip">Python</span><span class="chip">Selenium</span><span class="chip">Excel</span>
+            </div>
+          </div>
+          <div class="link"><span>Ver detalle</span> <span class="arrow">→</span></div>
+        </a>
+      </div>
+    </section>
+
     <footer>
-      © 2025 Johan Avendaño · GitHub Pages
+      © 2025 Johan Avendaño · <span class="muted">GitHub Pages</span>
     </footer>
   </div>
 
+  <!-- ✅ JS para toggle de tema (solo afecta este HOME) -->
   <script>
-    const toggle = document.getElementById('themeToggle');
-    const root = document.documentElement;
+    (function(){
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
 
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light') root.setAttribute('data-theme', 'light');
-
-    toggle.addEventListener('click', () => {
-      if (root.getAttribute('data-theme') === 'light') {
-        root.removeAttribute('data-theme');
-        localStorage.removeItem('theme');
-      } else {
+      // Si había una preferencia guardada, aplicarla
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') {
         root.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
       }
-    });
+
+      // Texto inicial del botón (opcional)
+      const setLabel = () => {
+        const isLight = root.getAttribute('data-theme') === 'light';
+        btn.textContent = isLight ? '🌙 Oscuro' : '🌗 Claro';
+        btn.title = isLight ? 'Cambiar a tema oscuro' : 'Cambiar a tema claro';
+      };
+      setLabel();
+
+      btn.addEventListener('click', () => {
+        const isLight = root.getAttribute('data-theme') === 'light';
+        if (isLight) {
+          root.removeAttribute('data-theme');    // vuelve a dark por defecto
+          localStorage.removeItem('theme');
+        } else {
+          root.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light');
+        }
+        setLabel();
+      });
+    })();
   </script>
 </body>
 </html>
