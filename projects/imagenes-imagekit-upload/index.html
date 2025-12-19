@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Redimensionado + subida a nube (ImageKit) | Johan Avendaño</title>
+  <meta name="description" content="Pipeline de imágenes para e-commerce: procesamiento (redimensionado/optimización), subida a ImageKit (CDN) y actualización automática de URLs en base de datos." />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2f;
+      --text:#e5e7eb;
+      --muted:#a7b0c0;
+      --line:rgba(255,255,255,.10);
+      --accent:#60a5fa;
+      --accent2:#34d399;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.25), transparent 55%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(52,211,153,.18), transparent 45%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:14px 18px;
+      border:1px solid var(--line);
+      background: rgba(15,26,47,.65);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      position: sticky; top:14px; z-index:10;
+    }
+    .brand{display:flex; gap:10px; align-items:center}
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(96,165,250,.10);
+    }
+    .brand strong{letter-spacing:.3px}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      font-weight:700;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18)}
+    header{padding:28px 0 10px}
+    h1{margin:0 0 8px; font-size: 34px; letter-spacing:-.5px}
+    .muted{color:var(--muted)}
+    .panel{
+      border:1px solid var(--line);
+      background: rgba(15,26,47,.55);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:14px;
+      align-items:start;
+    }
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .chip{
+      font-size: 12px;
+      color: rgba(229,231,235,.9);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      padding:6px 10px;
+      border-radius: 999px;
+    }
+    ul{margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.6}
+    .kpis{
+      display:grid; grid-template-columns: repeat(2, 1fr);
+      gap:10px; margin-top:12px;
+    }
+    .kpi{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .kpi strong{display:block; font-size:14px}
+    .kpi span{display:block; color:var(--muted); font-size:12px; margin-top:6px}
+    .demo{
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    iframe{width:100%; aspect-ratio: 16/9; border:0; display:block}
+    .callout{
+      border:1px solid rgba(96,165,250,.25);
+      background: linear-gradient(135deg, rgba(96,165,250,.10), rgba(52,211,153,.06));
+      border-radius: 14px;
+      padding: 12px;
+      margin-top: 14px;
+      color: rgba(229,231,235,.92);
+    }
+    footer{
+      padding:24px 0 40px;
+      color: var(--muted);
+      text-align:center;
+      border-top:1px solid var(--line);
+      margin-top: 18px;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr}
+      .nav{border-radius: 18px}
+      h1{font-size: 28px}
+      .kpis{grid-template-columns: 1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <div class="dot"></div>
+        <strong>Johan Avendaño</strong>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap">
+        <a class="btn" href="../../" title="Volver al inicio">← Inicio</a>
+        <a class="btn" href="../../#proyectos" title="Ver proyectos">Proyectos</a>
+      </div>
+    </div>
+
+    <header>
+      <h1>Redimensionado + subida a nube (ImageKit)</h1>
+      <p class="muted" style="margin:0; line-height:1.6">
+        Pipeline automatizado para optimizar imágenes de catálogo y publicarlas en CDN:
+        procesa (redimensiona/optimiza), sube a ImageKit y actualiza automáticamente las URLs
+        en la base de datos para que el catálogo consuma siempre recursos rápidos y consistentes.
+      </p>
+
+      <div class="chips">
+        <span class="chip">Python</span>
+        <span class="chip">PIL / Pillow</span>
+        <span class="chip">ImageKit</span>
+        <span class="chip">MongoDB</span>
+        <span class="chip">CDN workflow</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="panel">
+        <h2 style="margin:0 0 8px; font-size:16px">Qué problema resuelve</h2>
+        <ul>
+          <li>Mejora velocidad de carga al servir imágenes desde CDN en vez de fuentes lentas/inestables.</li>
+          <li>Estandariza formatos y tamaños para catálogos y marketplaces.</li>
+          <li>Reduce peso de imágenes sin perder calidad visual relevante.</li>
+          <li>Evita actualizar URLs manualmente en miles de productos.</li>
+        </ul>
+
+        <h2 style="margin:18px 0 8px; font-size:16px">Qué hace</h2>
+        <ul>
+          <li>Lee imágenes de entrada (URLs o archivos) asociadas a productos.</li>
+          <li>Procesa: redimensiona a un tamaño objetivo y optimiza compresión.</li>
+          <li>Sube a ImageKit y obtiene URL final de CDN.</li>
+          <li>Actualiza la base de datos con la nueva URL (manteniendo relación con el producto).</li>
+          <li>Guarda trazabilidad: fecha, estado, errores, reintentos y conteos por lote.</li>
+        </ul>
+
+        <h2 style="margin:18px 0 8px; font-size:16px">Flujo resumido</h2>
+        <p class="muted" style="margin:0; line-height:1.6">
+          Entrada (imágenes) → Procesamiento (resize/optimización) → Upload (ImageKit) →
+          URL CDN → Update en BD → Catálogo listo para consumo.
+        </p>
+
+        <div class="kpis">
+          <div class="kpi">
+            <strong>Objetivo</strong>
+            <span>CDN rápido + URLs consistentes</span>
+          </div>
+          <div class="kpi">
+            <strong>Escala</strong>
+            <span>Procesamiento por lotes con reintentos</span>
+          </div>
+          <div class="kpi">
+            <strong>Salida</strong>
+            <span>URLs ImageKit guardadas en BD</span>
+          </div>
+          <div class="kpi">
+            <strong>Control</strong>
+            <span>Estados por imagen + logs</span>
+          </div>
+        </div>
+
+        <div class="callout">
+          <b>Nota:</b> se omiten llaves/API keys, endpoints exactos y estructura interna del catálogo.
+          La demostración se enfoca en el resultado: imagen optimizada → URL CDN → actualización en BD.
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 style="margin:0 0 10px; font-size:16px">Demo</h2>
+
+        <!-- Reemplaza por tu video cuando lo tengas -->
+        <div class="demo">
+          <iframe
+            src="https://www.youtube.com/embed/YQ1TsymPfOU"
+            title="Demo Pipeline ImageKit"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <p class="muted" style="margin:12px 0 0; line-height:1.6">
+          Demo sugerido: antes/después (peso y tamaño), subida a ImageKit y actualización de la URL final en la base de datos.
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      © 2025 Johan Avendaño · GitHub Pages
+    </footer>
+  </div>
+</body>
+</html>
