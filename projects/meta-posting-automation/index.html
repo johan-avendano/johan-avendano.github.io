@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Publicación en Facebook/Instagram (Graph API) | Johan Avendaño</title>
+  <meta name="description" content="Automatización de publicaciones para Facebook e Instagram usando Graph API: generación de copys, publicación programada, manejo de errores y trazabilidad por contenido." />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2f;
+      --text:#e5e7eb;
+      --muted:#a7b0c0;
+      --line:rgba(255,255,255,.10);
+      --accent:#60a5fa;
+      --accent2:#34d399;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.25), transparent 55%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(52,211,153,.18), transparent 45%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:14px 18px;
+      border:1px solid var(--line);
+      background: rgba(15,26,47,.65);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      position: sticky; top:14px; z-index:10;
+    }
+    .brand{display:flex; gap:10px; align-items:center}
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(96,165,250,.10);
+    }
+    .brand strong{letter-spacing:.3px}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      font-weight:700;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18)}
+    header{padding:28px 0 10px}
+    h1{margin:0 0 8px; font-size: 34px; letter-spacing:-.5px}
+    .muted{color:var(--muted)}
+    .panel{
+      border:1px solid var(--line);
+      background: rgba(15,26,47,.55);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:14px;
+      align-items:start;
+    }
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .chip{
+      font-size: 12px;
+      color: rgba(229,231,235,.9);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      padding:6px 10px;
+      border-radius: 999px;
+    }
+    ul{margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.6}
+    .kpis{
+      display:grid; grid-template-columns: repeat(2, 1fr);
+      gap:10px; margin-top:12px;
+    }
+    .kpi{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .kpi strong{display:block; font-size:14px}
+    .kpi span{display:block; color:var(--muted); font-size:12px; margin-top:6px}
+    .demo{
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    iframe{width:100%; aspect-ratio: 16/9; border:0; display:block}
+    .callout{
+      border:1px solid rgba(96,165,250,.25);
+      background: linear-gradient(135deg, rgba(96,165,250,.10), rgba(52,211,153,.06));
+      border-radius: 14px;
+      padding: 12px;
+      margin-top: 14px;
+      color: rgba(229,231,235,.92);
+    }
+    footer{
+      padding:24px 0 40px;
+      color: var(--muted);
+      text-align:center;
+      border-top:1px solid var(--line);
+      margin-top: 18px;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr}
+      .nav{border-radius: 18px}
+      h1{font-size: 28px}
+      .kpis{grid-template-columns: 1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">
+        <div class="dot"></div>
+        <strong>Johan Avendaño</strong>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap">
+        <a class="btn" href="../../" title="Volver al inicio">← Inicio</a>
+        <a class="btn" href="../../#proyectos" title="Ver proyectos">Proyectos</a>
+      </div>
+    </div>
+
+    <header>
+      <h1>Publicación en Facebook/Instagram (Graph API)</h1>
+      <p class="muted" style="margin:0; line-height:1.6">
+        Automatización para publicar contenido en redes sociales usando Meta Graph API:
+        generación/armado de copys, publicación (o programación), manejo de errores y trazabilidad
+        por post, manteniendo un flujo estable para marketing de catálogo.
+      </p>
+
+      <div class="chips">
+        <span class="chip">Python</span>
+        <span class="chip">Requests / HTTP</span>
+        <span class="chip">Meta Graph API</span>
+        <span class="chip">MongoDB</span>
+        <span class="chip">Automatización</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="panel">
+        <h2 style="margin:0 0 8px; font-size:16px">Qué problema resuelve</h2>
+        <ul>
+          <li>Evita publicar manualmente contenido repetitivo (copys + enlaces + assets).</li>
+          <li>Permite estandarizar el formato de publicaciones por campaña o categoría.</li>
+          <li>Reduce errores de copy/URL y mantiene trazabilidad por post.</li>
+          <li>Facilita programar lotes (ej. N publicaciones por día).</li>
+        </ul>
+
+        <h2 style="margin:18px 0 8px; font-size:16px">Qué hace</h2>
+        <ul>
+          <li>Obtiene contenido desde una fuente interna (BD/Excel/lista de productos).</li>
+          <li>Construye el copy (plantillas por tipo de publicación) y adjunta enlaces.</li>
+          <li>Publica o programa vía Graph API (según permisos/configuración).</li>
+          <li>Registra el resultado: ID del post, fecha, estado y errores.</li>
+          <li>Incluye reintentos y validaciones básicas para estabilidad del proceso.</li>
+        </ul>
+
+        <h2 style="margin:18px 0 8px; font-size:16px">Flujo resumido</h2>
+        <p class="muted" style="margin:0; line-height:1.6">
+          Fuente (productos/copys) → Plantillas de publicación → Graph API → Confirmación (post ID/estado) →
+          Registro en BD (historial y resultados).
+        </p>
+
+        <div class="kpis">
+          <div class="kpi">
+            <strong>Objetivo</strong>
+            <span>Publicaciones consistentes y repetibles</span>
+          </div>
+          <div class="kpi">
+            <strong>Salida</strong>
+            <span>ID del post + estado registrado</span>
+          </div>
+          <div class="kpi">
+            <strong>Operación</strong>
+            <span>Por lotes / programado</span>
+          </div>
+          <div class="kpi">
+            <strong>Control</strong>
+            <span>Logs, errores y reintentos</span>
+          </div>
+        </div>
+
+        <div class="callout">
+          <b>Nota:</b> por seguridad se omiten tokens, IDs reales, permisos y endpoints exactos.
+          La demo se enfoca en el flujo: contenido → publicación → confirmación → trazabilidad.
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 style="margin:0 0 10px; font-size:16px">Demo</h2>
+
+        <!-- Reemplaza por tu video cuando lo tengas -->
+        <div class="demo">
+          <iframe
+            src="https://www.youtube.com/embed/YQ1TsymPfOU"
+            title="Demo Publicación con Meta Graph API"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <p class="muted" style="margin:12px 0 0; line-height:1.6">
+          Demo sugerido: seleccionar 1 contenido, armar el copy, ejecutar publicación y mostrar el ID/estado guardado.
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      © 2025 Johan Avendaño · GitHub Pages
+    </footer>
+  </div>
+</body>
+</html>
