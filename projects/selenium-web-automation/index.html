@@ -6,6 +6,9 @@
   <title>Automatización web con Selenium | Johan Avendaño</title>
   <meta name="description" content="Proyecto de automatización web end-to-end con Python y Selenium: login, formularios, validaciones, descargas y manejo de errores." />
 
+  <!-- Theme global (claro/oscuro) -->
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+
   <style>
     :root{
       --bg:#0b1220;
@@ -55,6 +58,10 @@
       font-weight:700;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
       white-space:nowrap;
+
+      /* ✅ para que el botón de tema se sienta igual a los links */
+      cursor: pointer;
+      color: inherit;
     }
     .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18)}
     header{padding:28px 0 10px}
@@ -126,8 +133,9 @@
         <strong>Johan Avendaño</strong>
       </div>
       <div style="display:flex; gap:10px; flex-wrap:wrap">
-        <a class="btn" href="/" title="Volver al inicio">← Inicio</a>
-        <a class="btn" href="/#proyectos" title="Ver proyectos">Proyectos</a>
+        <a class="btn" href="../../" title="Volver al inicio">← Inicio</a>
+        <a class="btn" href="../../#proyectos" title="Ver proyectos">Proyectos</a>
+        <button class="btn" type="button" data-theme-toggle>🌗 Tema</button>
       </div>
     </div>
 
@@ -189,7 +197,6 @@
       <div class="panel">
         <h2 style="margin:0 0 10px; font-size:16px">Demo</h2>
 
-        <!-- Reemplaza el ID del video por el tuyo cuando tengas el demo -->
         <div class="demo">
           <iframe
             src="https://www.youtube.com/embed/YQ1TsymPfOU"
@@ -209,5 +216,8 @@
       © 2025 Johan Avendaño · GitHub Pages
     </footer>
   </div>
+
+  <!-- Theme global (claro/oscuro) -->
+  <script src="../../assets/js/theme.js"></script>
 </body>
 </html>
