@@ -9,27 +9,28 @@
   --shadow: 0 18px 60px rgba(0,0,0,.35);
 }
 
-/* ✅ Tema claro suave */
+/* Tema claro suave */
 html[data-theme="light"]{
-  --bg:#f1f5f9;
+  --bg:#f1f5f9;                 /* slate-100 */
   --card:rgba(255,255,255,.92);
-  --text:#0f172a;
-  --muted:#475569;
+  --text:#0f172a;               /* slate-900 */
+  --muted:#475569;              /* slate-600 */
   --line:rgba(15,23,42,.12);
-  --accent:#2563eb;
-  --accent2:#059669;
+  --accent:#2563eb;             /* blue-600 */
+  --accent2:#059669;            /* emerald-600 */
   --shadow: 0 18px 50px rgba(15,23,42,.12);
 }
 
-/* ✅ Fondo global */
+/* Fondo global */
 body{
   background:
     radial-gradient(1200px 600px at 20% -10%, rgba(96,165,250,.25), transparent 55%),
     radial-gradient(900px 500px at 90% 0%, rgba(52,211,153,.18), transparent 45%),
     var(--bg);
+  color: var(--text);
 }
 
-/* ✅ Fondo en light */
+/* Fondo en light */
 html[data-theme="light"] body{
   background:
     radial-gradient(1200px 600px at 20% -10%, rgba(37,99,235,.14), transparent 58%),
@@ -37,75 +38,77 @@ html[data-theme="light"] body{
     var(--bg);
 }
 
-/* =========================================================
-   ✅ Ajustes globales de componentes en tema LIGHT
-   (esto es lo que te “faltó” al pasar a global)
-   ========================================================= */
+/* =========================
+   OVERRIDES GLOBALES EN LIGHT
+   (replican tu HOME anterior)
+   ========================= */
 
-/* nav más claro */
+/* Nav más clara */
 html[data-theme="light"] .nav{
-  background: rgba(255,255,255,.72);
+  background: rgba(255,255,255,.72) !important;
 }
 
-/* punto (dot) más suave */
-html[data-theme="light"] .dot{
-  box-shadow: 0 0 0 6px rgba(37,99,235,.10);
-}
-
-/* panel: usar --card en light */
+/* Panel/tarjetas en claro: usa --card */
 html[data-theme="light"] .panel{
-  background: var(--card);
+  background: var(--card) !important;
 }
 
-/* cards: fondo claro y hover coherente */
+/* Cards de grilla */
 html[data-theme="light"] .card{
-  background: rgba(255,255,255,.82);
-  box-shadow: 0 12px 40px rgba(15,23,42,.08);
+  background: rgba(255,255,255,.82) !important;
+  box-shadow: 0 12px 40px rgba(15,23,42,.08) !important;
 }
 html[data-theme="light"] .card:hover{
-  border-color: rgba(37,99,235,.28);
-  background: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.92) !important;
+  border-color: rgba(37,99,235,.28) !important;
 }
 
-/* chips en light: texto oscuro suave */
-html[data-theme="light"] .chip{
-  color: rgba(15,23,42,.86);
-  background: rgba(15,23,42,.03);
-}
-
-/* botones hover en light */
+/* Botones: hover suave en claro */
 html[data-theme="light"] .btn:hover{
-  background: rgba(15,23,42,.04);
-  border-color: rgba(15,23,42,.16);
+  background: rgba(15,23,42,.04) !important;
+  border-color: rgba(15,23,42,.16) !important;
 }
 
-/* botón primary en light */
+/* Botón primary en claro */
 html[data-theme="light"] .btn.primary{
-  background: linear-gradient(135deg, rgba(37,99,235,.14), rgba(5,150,105,.10));
-  border-color: rgba(37,99,235,.25);
+  background: linear-gradient(135deg, rgba(37,99,235,.14), rgba(5,150,105,.10)) !important;
+  border-color: rgba(37,99,235,.25) !important;
 }
 
-/* perfil en light */
+/* Chips más legibles en claro */
+html[data-theme="light"] .chip{
+  color: rgba(15,23,42,.86) !important;
+  background: rgba(15,23,42,.03) !important;
+}
+
+/* Perfil en claro */
 html[data-theme="light"] .profile{
-  background: rgba(15,23,42,.02);
+  background: rgba(15,23,42,.02) !important;
 }
+
+/* Avatar en claro */
 html[data-theme="light"] .avatar{
-  border-color: rgba(15,23,42,.12);
-  box-shadow: 0 14px 40px rgba(15,23,42,.10);
-  background: rgba(15,23,42,.03);
+  border-color: rgba(15,23,42,.12) !important;
+  box-shadow: 0 14px 40px rgba(15,23,42,.10) !important;
+  background: rgba(15,23,42,.03) !important;
 }
 
-/* (opcional) pitch ligeramente más sólido en light */
+/* Pitch ligeramente más marcado en claro */
 html[data-theme="light"] .pitch{
-  opacity: .98;
+  opacity: .98 !important;
 }
 
-/* ticks en light */
+/* Tick en claro */
 html[data-theme="light"] .tick{
-  background: rgba(5,150,105,.10);
-  border-color: rgba(5,150,105,.28);
+  background: rgba(5,150,105,.10) !important;
+  border-color: rgba(5,150,105,.28) !important;
 }
 html[data-theme="light"] .tick:after{
-  border-right-color: rgba(5,150,105,.9);
-  border-bottom-color: rgba(5,150,105,.9);
+  border-right-color: rgba(5,150,105,.9) !important;
+  border-bottom-color: rgba(5,150,105,.9) !important;
+}
+
+/* Dot halo en claro (si usas .dot) */
+html[data-theme="light"] .dot{
+  box-shadow: 0 0 0 6px rgba(37,99,235,.10) !important;
 }
