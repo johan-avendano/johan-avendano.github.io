@@ -113,7 +113,15 @@
       border-radius: 14px;
       padding: 12px;
       margin-top: 14px;
-      color: rgba(229,231,235,.92);
+    
+      /* ✅ en vez de color fijo */
+      color: var(--text);
+    }
+    /* ✅ ajuste extra en tema claro para que quede bien suave */
+    html[data-theme="light"] .callout{
+      border-color: rgba(37,99,235,.22);
+      background: linear-gradient(135deg, rgba(37,99,235,.08), rgba(5,150,105,.06));
+      color: rgba(15,23,42,.92);
     }
     footer{
       padding:24px 0 40px;
