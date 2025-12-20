@@ -6,6 +6,9 @@
   <title>Johan Avendaño | Python Automation</title>
   <meta name="description" content="Portfolio de automatización con Python: Selenium, APIs, MongoDB, scraping y automatización de procesos para e-commerce y operaciones." />
 
+  <!-- ✅ Theme global (claro/oscuro) -->
+  <link rel="stylesheet" href="assets/css/theme.css">
+
   <style>
     :root{
       --bg:#0b1220;
@@ -20,18 +23,6 @@
       --max: 1040px;
     }
 
-    /* 🌗 Tema claro suave (no blanco puro) */
-    html[data-theme="light"]{
-      --bg:#f1f5f9;             /* slate-100 */
-      --card:rgba(255,255,255,.92);
-      --text:#0f172a;           /* slate-900 */
-      --muted:#475569;          /* slate-600 */
-      --line:rgba(15,23,42,.12);
-      --accent:#2563eb;         /* blue-600 */
-      --accent2:#059669;        /* emerald-600 */
-      --shadow: 0 18px 50px rgba(15,23,42,.12);
-    }
-
     *{box-sizing:border-box}
     body{
       margin:0;
@@ -41,14 +32,6 @@
         radial-gradient(900px 500px at 90% 0%, rgba(52,211,153,.18), transparent 45%),
         var(--bg);
       color:var(--text);
-    }
-
-    /* Ajuste del fondo cuando es tema claro (más suave) */
-    html[data-theme="light"] body{
-      background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(37,99,235,.14), transparent 58%),
-        radial-gradient(900px 500px at 90% 0%, rgba(5,150,105,.10), transparent 52%),
-        var(--bg);
     }
 
     a{color:inherit; text-decoration:none}
@@ -63,19 +46,11 @@
       position: sticky; top:14px; z-index:10;
     }
 
-    /* nav más claro en tema light */
-    html[data-theme="light"] .nav{
-      background: rgba(255,255,255,.72);
-    }
-
     .brand{display:flex; gap:10px; align-items:center}
     .dot{
       width:10px;height:10px;border-radius:50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       box-shadow: 0 0 0 6px rgba(96,165,250,.10);
-    }
-    html[data-theme="light"] .dot{
-      box-shadow: 0 0 0 6px rgba(37,99,235,.10);
     }
     .brand strong{letter-spacing:.3px}
 
@@ -90,21 +65,13 @@
       font-weight:600;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
       white-space:nowrap;
-      cursor:pointer; /* para el botón */
+      cursor:pointer;
     }
     .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18)}
-    html[data-theme="light"] .btn:hover{
-      background: rgba(15,23,42,.04);
-      border-color: rgba(15,23,42,.16);
-    }
 
     .btn.primary{
       background: linear-gradient(135deg, rgba(96,165,250,.22), rgba(52,211,153,.18));
       border-color: rgba(96,165,250,.35);
-    }
-    html[data-theme="light"] .btn.primary{
-      background: linear-gradient(135deg, rgba(37,99,235,.14), rgba(5,150,105,.10));
-      border-color: rgba(37,99,235,.25);
     }
 
     header{padding:34px 0 10px}
@@ -121,14 +88,10 @@
       box-shadow: var(--shadow);
       padding: 22px;
     }
-    html[data-theme="light"] .panel{
-      background: var(--card);
-    }
 
     h1{margin:0 0 8px; font-size: 40px; line-height:1.05; letter-spacing:-.6px}
     .role{color:var(--muted); font-size: 16px; margin:0 0 14px}
     .pitch{color:var(--text); opacity:.92; line-height:1.55; margin:0}
-    html[data-theme="light"] .pitch{opacity:.98}
 
     .bullets{margin:14px 0 0; padding:0; list-style:none; display:grid; gap:10px}
     .bullets li{display:flex; gap:10px; align-items:flex-start; color: var(--muted)}
@@ -140,10 +103,6 @@
       position:relative;
       flex: 0 0 auto;
     }
-    html[data-theme="light"] .tick{
-      background: rgba(5,150,105,.10);
-      border-color: rgba(5,150,105,.28);
-    }
     .tick:after{
       content:"";
       position:absolute; left:5px; top:4px;
@@ -151,10 +110,6 @@
       border-right:2px solid rgba(52,211,153,.9);
       border-bottom:2px solid rgba(52,211,153,.9);
       transform: rotate(45deg);
-    }
-    html[data-theme="light"] .tick:after{
-      border-right-color: rgba(5,150,105,.9);
-      border-bottom-color: rgba(5,150,105,.9);
     }
 
     .stack{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
@@ -165,10 +120,6 @@
       background: rgba(255,255,255,.04);
       padding:6px 10px;
       border-radius: 999px;
-    }
-    html[data-theme="light"] .chip{
-      color: rgba(15,23,42,.86);
-      background: rgba(15,23,42,.03);
     }
 
     /* ✅ PERFIL */
@@ -182,9 +133,6 @@
       border-radius: 14px;
       margin-bottom:14px;
     }
-    html[data-theme="light"] .profile{
-      background: rgba(15,23,42,.02);
-    }
     .avatar{
       width:72px;
       height:72px;
@@ -194,11 +142,6 @@
       background: rgba(255,255,255,.04);
       box-shadow: 0 14px 40px rgba(0,0,0,.28);
       flex: 0 0 auto;
-    }
-    html[data-theme="light"] .avatar{
-      border-color: rgba(15,23,42,.12);
-      box-shadow: 0 14px 40px rgba(15,23,42,.10);
-      background: rgba(15,23,42,.03);
     }
     .profile .name{
       margin:0;
@@ -245,18 +188,10 @@
       min-height: 185px;
       display:flex; flex-direction:column; justify-content:space-between;
     }
-    html[data-theme="light"] .card{
-      background: rgba(255,255,255,.82);
-      box-shadow: 0 12px 40px rgba(15,23,42,.08);
-    }
     .card:hover{
       transform: translateY(-2px);
       border-color: rgba(96,165,250,.35);
       background: rgba(15,26,47,.62);
-    }
-    html[data-theme="light"] .card:hover{
-      border-color: rgba(37,99,235,.28);
-      background: rgba(255,255,255,.92);
     }
     .card h3{margin:0 0 8px; font-size:16px}
     .card p{margin:0 0 10px; color:var(--muted); line-height:1.45}
@@ -298,14 +233,15 @@
         <div class="dot"></div>
         <strong>Johan Avendaño</strong>
       </div>
+
       <div class="links">
         <!-- Actualiza estos enlaces -->
         <a class="btn primary" href="assets/cv/Johan_Avendano_CV.pdf" title="Descargar CV (PDF)">CV (PDF)</a>
         <a class="btn" href="https://www.linkedin.com/" title="LinkedIn" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="mailto:TU_CORREO@EMAIL.COM" title="Email">Email</a>
 
-        <!-- 🌗 Botón de tema -->
-        <button class="btn" id="themeToggle" type="button" title="Cambiar tema">🌗 Tema</button>
+        <!-- ✅ Botón universal de tema -->
+        <button class="btn" type="button" data-theme-toggle>🌗 Tema</button>
       </div>
     </div>
 
@@ -345,8 +281,6 @@
         </div>
 
         <div class="panel">
-
-          <!-- ✅ BLOQUE PERFIL -->
           <div class="profile">
             <img class="avatar" src="assets/img/perfil.png" alt="Foto de Johan Avendaño" loading="lazy">
             <div>
@@ -551,38 +485,7 @@
     </footer>
   </div>
 
-  <!-- ✅ JS para toggle de tema (solo afecta este HOME) -->
-  <script>
-    (function(){
-      const root = document.documentElement;
-      const btn = document.getElementById('themeToggle');
-
-      // Si había una preferencia guardada, aplicarla
-      const saved = localStorage.getItem('theme');
-      if (saved === 'light') {
-        root.setAttribute('data-theme', 'light');
-      }
-
-      // Texto inicial del botón (opcional)
-      const setLabel = () => {
-        const isLight = root.getAttribute('data-theme') === 'light';
-        btn.textContent = isLight ? '🌙 Oscuro' : '🌗 Claro';
-        btn.title = isLight ? 'Cambiar a tema oscuro' : 'Cambiar a tema claro';
-      };
-      setLabel();
-
-      btn.addEventListener('click', () => {
-        const isLight = root.getAttribute('data-theme') === 'light';
-        if (isLight) {
-          root.removeAttribute('data-theme');    // vuelve a dark por defecto
-          localStorage.removeItem('theme');
-        } else {
-          root.setAttribute('data-theme', 'light');
-          localStorage.setItem('theme', 'light');
-        }
-        setLabel();
-      });
-    })();
-  </script>
+  <!-- ✅ Theme global (claro/oscuro) -->
+  <script src="assets/js/theme.js"></script>
 </body>
 </html>
