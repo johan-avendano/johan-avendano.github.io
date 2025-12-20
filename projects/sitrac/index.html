@@ -6,6 +6,9 @@
   <title>SITRAC → SIIGO + DIAN | Johan Avendaño</title>
   <meta name="description" content="Automatización end-to-end con Python: integración de egresos, creación en SIIGO y gestión de procesos DIAN, sin publicar código sensible." />
 
+  <!-- Theme global (claro/oscuro) -->
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+
   <style>
     :root{
       --bg:#0b1220;
@@ -55,6 +58,10 @@
       font-weight:700;
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
       white-space:nowrap;
+
+      /* ✅ para que el botón de tema se sienta igual a los links */
+      cursor: pointer;
+      color: inherit;
     }
     .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18)}
     header{padding:28px 0 10px}
@@ -108,7 +115,15 @@
       border-radius: 14px;
       padding: 12px;
       margin-top: 14px;
-      color: rgba(229,231,235,.92);
+
+      /* ✅ en vez de color fijo */
+      color: var(--text);
+    }
+    /* ✅ ajuste extra en tema claro para que quede bien suave */
+    html[data-theme="light"] .callout{
+      border-color: rgba(37,99,235,.22);
+      background: linear-gradient(135deg, rgba(37,99,235,.08), rgba(5,150,105,.06));
+      color: rgba(15,23,42,.92);
     }
     footer{
       padding:24px 0 40px;
@@ -136,6 +151,7 @@
       <div style="display:flex; gap:10px; flex-wrap:wrap">
         <a class="btn" href="../../" title="Volver al inicio">← Inicio</a>
         <a class="btn" href="../../#proyectos" title="Ver proyectos">Proyectos</a>
+        <button class="btn" type="button" data-theme-toggle>🌗 Tema</button>
       </div>
     </div>
 
@@ -206,7 +222,6 @@
       <div class="panel">
         <h2 style="margin:0 0 10px; font-size:16px">Demo</h2>
 
-        <!-- Reemplaza por tu video cuando lo tengas -->
         <div class="demo">
           <iframe
             src="https://www.youtube.com/embed/YQ1TsymPfOU"
@@ -227,6 +242,8 @@
       © 2025 Johan Avendaño · GitHub Pages
     </footer>
   </div>
+
+  <!-- Theme global (claro/oscuro) -->
+  <script src="../../assets/js/theme.js"></script>
 </body>
 </html>
-
